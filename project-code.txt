@@ -1,0 +1,156 @@
+#include<Servo.h>
+#include<Wire.h>
+#include<LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd (0x27 ,16 ,4);
+
+Servo myservo;
+
+int IRSensorE = D3;
+int IRSensorB = D4;
+int IRSensor1= D5;
+int IRSensor2 = D6;
+int IRSensor3 = D7;
+int IRSensor4 = D8;
+
+int LED1 = D9;
+int LED2 = D10; 
+int LED3 = 9; 
+int LED4=10;
+
+ int s1=0,s2=0,s3=0,s4=0;
+ int slot =4;
+ int totalSlots=4;
+ 
+void setup() {
+  Serial.begin(9600);
+
+  pinMode (IRSensorE, INPUT);
+  pinMode (IRSensorB, INPUT);
+  pinMode (IRSensor1, INPUT);
+  pinMode (IRSensor2, INPUT);
+  pinMode (IRSensor3, INPUT);
+  pinMode (IRSensor4, INPUT);
+
+  pinMode (LED1, OUTPUT);
+  pinMode (LED2, OUTPUT); 
+  pinMode (LED3, OUTPUT); 
+PIN_FUNC_SELECT(PERIPHS_IO_MUX_SD_DATA2_U,FUNC_GPIO9);
+pinMode(LED3,FUNCTION_3);
+pinMode(LED3,OUTPUT);
+PIN_FUNC_SELECT(PERIPHS_IO_MUX_SD_DATA2_U,FUNC_GPIO10);
+pinMode(LED4,FUNCTION_3);
+pinMode(LED4,OUTPUT);
+
+myservo.attach(D0);
+
+ lcd.begin(16,4); 
+ lcd.backlight();
+ lcd.setCursor(0,1);
+ lcd.print("Car  Parking  ");
+ lcd.setCursor(0,2);
+ lcd.print("  System  ");
+ delay(8000);  
+ lcd.clear();
+
+ read_Sensor();
+
+ int total=s1+s2+s3+s4;
+ slot=slot-total;
+}
+
+void loop() {
+
+  read_Sensor();
+  slot=s1+s2+s3+s4;
+  Serial.print("\n Slots = ");
+  Serial.print(slot);
+  Serial.print("\\4\n");
+
+  lcd.setCursor(0,0);
+  lcd.print(slot);
+  lcd.print("| 4  ");
+
+  lcd.setCursor(0,1);
+  if(s1==1)
+  {
+    lcd.print("S1:FILL ");
+    Serial.print("\n S1:FILL \n");
+  }
+  else
+  {
+    lcd.print("S1:Empty");
+    Serial.print("\n S1:Empty \n");
+  }
+  
+  lcd.setCursor(10,1);
+  if(s2==1)
+  {
+    lcd.print("S2:FILL ");
+    Serial.print("\n S2:FILL \n");
+  }
+  else
+  {
+    lcd.print("S2:Empty");
+    Serial.print("\n S2:Empty \n");
+  }
+  
+  lcd.setCursor(0,2);
+  if(s3==1)
+  {
+    lcd.print("S3:FILL ");
+    Serial.print("\n S3:FILL \n");
+  }
+  else
+  {
+    lcd.print("S3:Empty");
+    Serial.print("\n S3:Empty \n");
+  }
+  
+  lcd.setCursor(10,2);
+  if(s4==1)
+  {
+    lcd.print("S4:FILL ");
+    Serial.print("\n S4:FILL \n");
+  }
+  else
+  {
+    lcd.print("S4:Empty");
+    Serial.print("\n S4:Empty \n");
+  }
+
+  if(digitalRead(IRSensorE)==0&&slot<4)
+  {
+    Serial.print("\n Car Entered \n");
+    myservo.write(180);
+    delay(3000);
+    myservo.write(90);
+  }
+  if(slot==4)
+  {
+    lcd.setCursor(0,0);
+    lcd.print(" Parking Full ");
+    delay(2000);
+  }
+  
+  if(digitalRead(IRSensorB) == 0)
+  {
+    Serial.print("\n Car Left \n");
+    myservo.write(180);
+    delay(3000);
+    myservo.write(90);
+  }
+  delay(200);
+}
+void read_Sensor()
+{
+  s1=s2=s3=s4=0;
+  if(digitalRead(IRSensor1)==0)
+  s1=1;
+  if(digitalRead(IRSensor2)==0)
+  s2=1;
+  if(digitalRead(IRSensor3)==0)
+  s3=1;
+  if(digitalRead(IRSensor4)==0)
+  s4=1;
+}
