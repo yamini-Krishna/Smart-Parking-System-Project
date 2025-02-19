@@ -39,5 +39,6 @@ Blynk Cloud – Remote parking status monitoring
 3️⃣ LCD Display → Connected to I2C Pins (Shows availability)
 
 4️⃣ LEDs → Connected to Digital Pins (Indicates slot status)
+
 5️⃣ WiFi Module → Connected to Serial Pins (Sends data to Blynk)
 
