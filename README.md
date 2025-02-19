@@ -1,6 +1,6 @@
 # Smart-Parking-System-Project
 
-This project implements a real-time Smart Parking System using IoT technology. The system monitors parking availability, automates gate control, and provides remote status updates using a Blynk cloud server.
+The Smart Parking System is an IoT-based project designed to monitor parking slot availability, automate gate control, and display real-time updates using IR sensors, an LCD screen, and a servo motor. When a car approaches, the system checks for available slots and opens the gate if space is available. Once parked, the slot is marked as occupied, and the updated status is displayed on the LCD and sent to a remote monitoring system (Blynk App or Serial Monitor). If the parking is full, the gate remains closed to prevent additional entry. This system improves efficiency, reduces manual supervision, and enhances the parking experience. 🚗✨
 
 **📌 Features**
 
