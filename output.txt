@@ -1,0 +1,36 @@
+Case 1: Car Enters and Parks in Slot 1
+Before Entry: Slots = 4/4 (All empty)
+Action: A car is detected by IRSensorE at the entrance. The gate opens, and the car parks in Slot 1.
+After Entry: Slots = 3/4
+
+LCD Display:
+3 | 4  
+S1: FILL   S2: Empty  
+S3: Empty  S4: Empty  
+
+Serial Monitor:
+Car Entered  
+Slots = 3/4  
+S1: FILL  
+S2: Empty  
+S3: Empty  
+S4: Empty  
+
+
+Case 2: Parking is Full (All Slots Occupied)
+Before Entry: Slots = 1/4
+Action: Two more cars enter, filling Slot 3 and Slot 4. The system detects all slots are full. The gate closes, preventing more entries.
+After Entry: Slots = 4/4 (Full)
+
+LCD Display:
+Parking Full  
+S1: FILL   S2: FILL  
+S3: FILL   S4: FILL  
+
+Serial Monitor:
+Parking Full  
+Slots = 4/4  
+S1: FILL  
+S2: FILL  
+S3: FILL  
+S4: FILL 
