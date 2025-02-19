@@ -3,6 +3,7 @@
 This project implements a real-time Smart Parking System using IoT technology. The system monitors parking availability, automates gate control, and provides remote status updates using a Blynk cloud server.
 
 **📌 Features**
+
 ✅ Real-time Parking Monitoring – Detects available & occupied slots
 
 ✅ LCD Display – Shows parking status (Full or Empty: X/Y)
@@ -14,6 +15,7 @@ This project implements a real-time Smart Parking System using IoT technology. T
 ✅ Remote Monitoring via Blynk – Check status from anywhere
 
 **🛠 Components Used**
+
 Arduino Uno – Main controller
 
 IR Sensors – Detects cars in parking slots
@@ -29,6 +31,7 @@ WiFi Module (ESP8266 or NodeMCU) – Sends data to Blynk app
 Blynk Cloud – Remote parking status monitoring
 
 **🔧 Circuit Connections**
+
 1️⃣ IR Sensors → Connected to Arduino Digital Pins (Detects cars)
 
 2️⃣ Servo Motor → Connected to PWM Pin (Gate opens when slot is free)
